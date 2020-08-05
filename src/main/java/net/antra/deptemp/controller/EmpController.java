@@ -4,6 +4,7 @@ import net.antra.deptemp.pojo.EmployeeVO;
 import net.antra.deptemp.pojo.validator.EmpvoValidator;
 import net.antra.deptemp.service.CodeService;
 import net.antra.deptemp.service.DepartmentService;
+import net.antra.deptemp.service.EmployeeService;
 import net.antra.deptemp.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -11,13 +12,11 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
-import net.antra.deptemp.service.EmployeeService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -60,7 +59,7 @@ public class EmpController {
 	}
 
 	@PostMapping("/createEmp")
-	public String createDept(ModelMap model, @ModelAttribute("emp") @Valid EmployeeVO emp, BindingResult br, RedirectAttributes rediAtrb) {
+	public String createDept(ModelMap model, @ModelAttribute("emp") @Validated EmployeeVO emp, BindingResult br, RedirectAttributes rediAtrb) {
 		if(!br.hasErrors()) {
 			ems.saveEmployee(emp);
 			rediAtrb.addFlashAttribute("successMsg", "The Employee is Created Successfully!");

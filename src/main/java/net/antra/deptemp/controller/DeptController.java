@@ -1,29 +1,22 @@
 package net.antra.deptemp.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import net.antra.deptemp.pojo.DepartmentVO;
 import net.antra.deptemp.pojo.validator.DeptvoValidator;
 import net.antra.deptemp.service.CodeService;
+import net.antra.deptemp.service.DepartmentService;
 import net.antra.deptemp.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
-import net.antra.deptemp.entity.Department;
-import net.antra.deptemp.service.DepartmentService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -53,7 +46,7 @@ public class DeptController {
 		return "createDept";
 	}
 	@PostMapping(value = "/newDept")
-	public String addNewDept(ModelMap model, @ModelAttribute("dept") @Valid DepartmentVO dept, RedirectAttributes rediAtrb, BindingResult br) {
+	public String addNewDept(ModelMap model, @ModelAttribute("dept") @Validated DepartmentVO dept, RedirectAttributes rediAtrb, BindingResult br) {
 		model.addAttribute("active_tab","new_dept");
 		if(!br.hasErrors()) {
 			deptService.saveDept(dept);

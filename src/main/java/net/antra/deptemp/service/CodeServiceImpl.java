@@ -5,7 +5,6 @@ import net.antra.deptemp.entity.DeptEmpCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.ws.ServiceMode;
 import java.util.List;
 @Service
 public class CodeServiceImpl implements CodeService {
@@ -19,6 +18,6 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     public DeptEmpCode getCodeById(int id) {
-        return codeDAO.findOne(id);
+        return codeDAO.findById(id).get();
     }
 }
